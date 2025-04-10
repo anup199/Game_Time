@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="quiz-container">
+    <h1>Welcome to the Quiz</h1>
+    <form id="loginForm">
+      <input type="text" id="studentName" placeholder="Enter your name" required>
+      <input type="text" id="fatherName" placeholder="Enter your father's name" required>
+      <button type="submit">Start Quiz</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const student = document.getElementById("studentName").value;
+      const father = document.getElementById("fatherName").value;
+
+      // Save to localStorage
+      localStorage.setItem("studentName", student);
+      localStorage.setItem("fatherName", father);
+
+      // Redirect to quiz page
+      window.location.href = "quiz.html";
+    });
+  </script>
+</body>
+</html>
