@@ -165,7 +165,7 @@ window.addEventListener("DOMContentLoaded", () => {
     answers: answers
   };
 
-  fetch("https://docs.google.com/spreadsheets/d/1Hd4jLg_ajFqEw0BFIGT8-8Yur1LY5uCOCuNfYhy0EI0/edit?usp=sharing", {
+  fetch("https://script.google.com/home/projects/19rRfHkkMJjtcHJPxnGJBqJkaPi047ZatP1O-rk0gPgQuW_8uwgkMhIar/executions", {
     method: "POST",
     body: JSON.stringify(payload),
     headers: {
