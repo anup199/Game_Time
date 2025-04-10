@@ -147,10 +147,36 @@ window.addEventListener("DOMContentLoaded", () => {
   }
   
   function showResult() {
-    document.getElementById("quiz").classList.add("hidden");
-    resultEl.classList.remove("hidden");
-    scoreEl.textContent = `Your score: ${score} out of ${quizData.length}`;
-  }
+  document.getElementById("quiz").classList.add("hidden");
+  resultEl.classList.remove("hidden");
+  scoreEl.textContent = `Your score: ${score} out of ${quizData.length}`;
+
+  const studentName = localStorage.getItem("studentName") || "Unknown";
+  const fatherName = localStorage.getItem("fatherName") || "Unknown";
+  const answers = quizData.slice(0, currentQuestion).map(q => q.answer);
+  const endTime = new Date().toLocaleTimeString();
+
+  const payload = {
+    name: studentName,
+    fatherName: fatherName,
+    score: score,
+    total: quizData.length,
+    time: endTime,
+    answers: answers
+  };
+
+  fetch("https://docs.google.com/spreadsheets/d/1Hd4jLg_ajFqEw0BFIGT8-8Yur1LY5uCOCuNfYhy0EI0/edit?usp=sharing", {
+    method: "POST",
+    body: JSON.stringify(payload),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+  .then(res => res.text())
+  .then(response => console.log("Saved to sheet:", response))
+  .catch(err => console.error("Error saving to sheet", err));
+}
+
   
   nextBtn.onclick = () => {
     currentQuestion++;
